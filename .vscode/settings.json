@@ -1,0 +1,13 @@
+{
+    "python.pythonPath": "./env/scripts/python",
+    "python.linting.flake8Enabled": true,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "none",
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.linting.enabled": true
+}

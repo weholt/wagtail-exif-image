@@ -1,0 +1,7 @@
+django
+watchdog
+exifread
+wagtail
+django-click
+requests
+iptcinfo3
