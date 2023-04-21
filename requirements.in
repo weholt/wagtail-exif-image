@@ -1,7 +1,9 @@
-django
 watchdog
 exifread
-wagtail
-django-click
 requests
 iptcinfo3
+python-dotenv
+
+django
+wagtail
+django-click

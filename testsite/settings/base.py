@@ -165,7 +165,4 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
-WAGTAILIMAGES_IMAGE_MODEL = "wagtail_exifimage.ExifImage"
-EXIF_IMAGE_WATCHED_FOLDER = os.path.join(os.path.abspath("."), "upload")
-EXIF_IMAGE_UPLOAD_URL = "http://localhost:8000/exif-image/upload/"
-EXIF_IMAGE_UPLOAD_DEFAULT_COLLECTION = "Uploaded"
+WAGTAILIMAGES_IMAGE_MODEL = "wagtail_exifimage.AdvancedIPTCExifImage"
