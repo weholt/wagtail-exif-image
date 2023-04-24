@@ -3,6 +3,7 @@ import os
 import sys
 import time
 
+import markdown
 import requests
 import watchdog.events
 import watchdog.observers
@@ -31,14 +32,22 @@ def upload_file(upload_key, url, filename, collections):
         metadata = get_basic_exif_data(filename)
         metadata["collections"] = collections
         metadata["upload_key"] = upload_key
+
+        base_path = os.path.split(filename)[0]
+        story_file = os.path.join(base_path, "story.md")
+        if os.path.exists(story_file):
+            with open(story_file, encoding="utf-8") as input_file:
+                metadata["story"] = markdown.markdown(input_file.read())
+
         try:
             with open(filename, "rb") as f:
                 r = requests.post(url, data=metadata, files={"file": f}, timeout=10)
-            logging.info(f"Uploaded {filename}. Result: {r.content}")
-        except ConnectionError:
-            logging.warning(f"Error connecting to {url}")
-        except PermissionError:
-            logging.warning(f"Permission error reading {filename}")
+                # content_type = r.headers.get("content-type") // application/json
+                logging.info(f"Uploaded {filename}. Result: {r.content}")
+        except ConnectionError as ex:
+            logging.warning(f"Error connecting to {url}: {ex}")
+        except PermissionError as ex:
+            logging.warning(f"Permission error reading {filename}: {ex}")
     except Exception as ex:
         logging.warning(f"Error processing {filename}: {ex}")
     except KeyboardInterrupt:
@@ -88,6 +97,10 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
 
 def main():
     src_path = EXIF_IMAGE_WATCHED_FOLDER
+    if not src_path:
+        logging.error("No folder to watch. Quitting.")
+        sys.exit(1)
+
     if not src_path[:-1] == os.sep:
         src_path += os.sep
 

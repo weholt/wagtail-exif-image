@@ -3,6 +3,7 @@ exifread
 requests
 iptcinfo3
 python-dotenv
+markdown
 
 django
 wagtail

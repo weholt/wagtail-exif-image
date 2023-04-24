@@ -7,13 +7,13 @@ from .models import EXIF_FIELDS, IPTC_FIELDS, AdvancedIPTCExifImage, BasicExifIm
 class BasicExifImageUploadForm(forms.ModelForm):
     class Meta:
         model = BasicExifImage
-        fields = ["file", "title"] + EXIF_FIELDS
+        fields = ["file", "title", "story"] + EXIF_FIELDS
 
 
 class AdvancedIPTCExifImageUploadForm(forms.ModelForm):
     class Meta:
         model = AdvancedIPTCExifImage
-        fields = ["file", "title"] + EXIF_FIELDS + IPTC_FIELDS
+        fields = ["file", "title", "story"] + EXIF_FIELDS + IPTC_FIELDS
 
 
 def get_upload_form():

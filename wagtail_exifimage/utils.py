@@ -29,6 +29,15 @@ def get_basic_exif_data(filename):
         "EXIF Flash",
         "EXIF FocalLength",
         "EXIF ColorSpace",
+        "EXIF Owner",
+        "Image Artist",
+        "Image Software",
+        "Image Copyright",
+        "EXIF BodySerialNumber",
+        "EXIF LensSpecification",
+        "EXIF LensMake",
+        "EXIF LensModel",
+        "EXIF LensSerialNumber",
     ]
 
     result = {}
@@ -77,7 +86,7 @@ def split_and_divide(string_value):
         return
 
 
-def transform_metadata(metadata):
+def remap_metadata_to_model_fields(metadata):
     result = {}
     result["date_time_original"] = metadata.get("EXIF DateTimeOriginal", None)
 
@@ -93,7 +102,7 @@ def transform_metadata(metadata):
     result["camera_model"] = metadata.get("Image Model", "")
     result["by_line"] = metadata.get("by-line", "")
     result["caption"] = metadata.get("caption/abstract", "")
-    result["cateogry"] = metadata.get("category", "")
+    result["category"] = metadata.get("category", "")
     result["city"] = metadata.get("city", "")
     result["copyright_notice"] = metadata.get("copyright notice", "")
     result["country_iso_location_code"] = metadata.get(
@@ -117,6 +126,17 @@ def transform_metadata(metadata):
     result["source"] = metadata.get("source", "")
     result["special_instructions"] = metadata.get("special instructions", "")
     result["location"] = metadata.get("sub-location", "")
+
+    result["owner"] = metadata.get("EXIF Owner")
+    result["artist"] = metadata.get("Image Artist")
+    result["software"] = metadata.get("Image Software")
+    result["copyright"] = metadata.get("Image Copyright")
+    result["camera_serial_number"] = metadata.get("EXIF BodySerialNumber")
+    result["lens_serial_number"] = metadata.get("EXIF LensSerialNumber")
+    result["lens_specification"] = metadata.get("EXIF LensSpecification")
+    result["lens_model"] = metadata.get("EXIF LensModel")
+    result["lens_make"] = metadata.get("EXIF LensMake")
+    result["story"] = metadata.get("story")
 
     final_result = {}
     for key in result:
