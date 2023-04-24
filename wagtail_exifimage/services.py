@@ -145,7 +145,8 @@ class MetadataTransformationService:
         setup = self.setup_for_image(image.camera_make, image.camera_model)
         tags = keywords
         tags += [
-            s.strip().capitalize() for s in image.category.split(setup.category_divider)
+            s.strip().capitalize()
+            for s in image.category.split(setup and setup.category_divider or "/")
         ]
 
         if image.software:
